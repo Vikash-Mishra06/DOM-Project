@@ -68,33 +68,36 @@ function todoList() {
 }
 todoList();
 
-let hours = Array.from({ length: 18 }, (_, idx) => {
-  return `${6 + idx}:00 - ${7 + idx}:00`;
-});
+function dailyPlanner() {
+  let hours = Array.from({ length: 18 }, (_, idx) => {
+    return `${6 + idx}:00 - ${7 + idx}:00`;
+  });
 
-let wholeDaySum = "";
-hours.forEach((elem, idx) => {
-  wholeDaySum += `
+  let wholeDaySum = "";
+  hours.forEach((elem, idx) => {
+    wholeDaySum += `
         <div class="day-planner-time">
           <p>${elem}</p>
           <input id="${idx}" type="text" placeholder="...">
         </div>`;
-});
-
-let dayPlanData = JSON.parse(localStorage.getItem("dayPlanData")) || {};
-
-let dayPlanner = document.querySelector(".day-planner");
-dayPlanner.innerHTML = wholeDaySum;
-
-let dayPlannerInputs = document.querySelectorAll(".day-planner input");
-
-dayPlannerInputs.forEach((elem) => {
-  if (dayPlanData[elem.id]) {
-    elem.value = dayPlanData[elem.id];
-  }
-
-  elem.addEventListener("input", () => {
-    dayPlanData[elem.id] = elem.value;
-    localStorage.setItem("dayPlanData", JSON.stringify(dayPlanData));
   });
-});
+
+  let dayPlanData = JSON.parse(localStorage.getItem("dayPlanData")) || {};
+
+  let dayPlanner = document.querySelector(".day-planner");
+  dayPlanner.innerHTML = wholeDaySum;
+
+  let dayPlannerInputs = document.querySelectorAll(".day-planner input");
+
+  dayPlannerInputs.forEach((elem) => {
+    if (dayPlanData[elem.id]) {
+      elem.value = dayPlanData[elem.id];
+    }
+
+    elem.addEventListener("input", () => {
+      dayPlanData[elem.id] = elem.value;
+      localStorage.setItem("dayPlanData", JSON.stringify(dayPlanData));
+    });
+  });
+}
+dailyPlanner();

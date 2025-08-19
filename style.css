@@ -278,6 +278,7 @@ body {
   box-shadow: 0 0 0 3px var(--tri);
 }
 
+
 @media (max-width: 900px) {
   .todo-container {
     flex-direction: column;
